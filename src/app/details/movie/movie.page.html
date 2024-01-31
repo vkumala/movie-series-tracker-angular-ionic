@@ -10,24 +10,47 @@
       <ion-title size="large">movie</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-img [src]="'https://image.tmdb.org/t/p/w1280'+ data.backdrop_path"
-  alt="The Wisconsin State Capitol building in Madison, WI at night"
-></ion-img>
+  <img [src]="'https://image.tmdb.org/t/p/w1280'+ data.backdrop_path">
   <img [src]="'https://image.tmdb.org/t/p/w200'+ data.poster_path">
- <h1>{{data.title}}</h1>
- <ion-segment value="heart">
-  <ion-segment-button value="home">
-    Watchlist
-  </ion-segment-button>
-  <ion-segment-button value="heart">
-    Watching
-  </ion-segment-button>
-  <ion-segment-button value="pin">
-    Watched
-  </ion-segment-button>
-  <ion-segment-button value="star">
-    Abandoned
-  </ion-segment-button>
-</ion-segment>
-<ion-chip *ngFor="let genre of data.genres">{{genre.name}}</ion-chip>
+  <h1>{{data.title}}</h1>
+  <h3>{{data.release_date}}|{{data.runtime}} minutes</h3>
+  <h5>{{data.overview}}</h5>
+
+  <ion-chip *ngFor="let genre of data.genres">{{genre.name}}</ion-chip>
+  <h4>"{{data.tagline}}"</h4>
+  <ion-row>
+    <ion-col class="border">{{data.vote_average}}/10</ion-col>
+    <ion-col class="border">
+      <ion-button>Bewerten</ion-button>
+    </ion-col>
+    <ion-col class="border">{{data.popularity}}</ion-col>
+  </ion-row>
+  <ion-segment value="heart">
+    <ion-segment-button value="home">
+      Watchlist
+    </ion-segment-button>
+    <ion-segment-button value="heart">
+      Watching
+    </ion-segment-button>
+    <ion-segment-button value="pin">
+      Watched
+    </ion-segment-button>
+    <ion-segment-button value="star">
+      Abandoned
+    </ion-segment-button>
+  </ion-segment>
+  <div style="
+  text-align: center;">
+
+    <ion-icon size="large" name="star"></ion-icon>
+
+    <ion-icon size="large" name="star"></ion-icon>
+
+    <ion-icon size="large" name="star"></ion-icon>
+
+    <ion-icon size="large" name="star"></ion-icon>
+
+    <ion-icon size="large" name="star"></ion-icon>
+  </div>
+
 </ion-content>
