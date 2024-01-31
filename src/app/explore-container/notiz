@@ -1,0 +1,28 @@
+watchlist
+nowWatching
+doneWathing
+pending
+abandoned
+rating
+
+added
+watching
+watched
+abandoned
+timestamp_bookmarked
+/** 
+* Paste one or more documents here
+*/
+{
+  "_id": {
+    "$oid": "65b0ff308d53ed65c5183fd3"
+  }
+  "id": 240,
+  "status": "added"
+  "notes": "",
+  "rating": 8.8,
+  "timestamp_added": "",
+  "date_watching": "",
+  "date_done": "",
+  "date_rating": "",
+}

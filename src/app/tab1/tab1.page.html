@@ -1,0 +1,63 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Startseite
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-button (click)="testFunction()">TEST</ion-button>
+  <ion-searchbar animated="true" placeholder="Search a movie or TV show"></ion-searchbar>
+  <h1>Now Playing </h1>
+  <div class="scrolling-wrapper">
+    <app-poster-card *ngFor="let movie of nowPlayingMovies" [title]="movie.title"
+      [poster_path]="movie.poster_path"></app-poster-card>
+  </div>
+<!-- 
+  <h1>Popular </h1>
+  <div class="scrolling-wrapper">
+    <app-poster-card *ngFor="let movie of popularMovies" [title]="movie.title"
+      [poster_path]="movie.poster_path"></app-poster-card>
+  </div>
+
+  <h1>Top Rated </h1>
+  <div class="scrolling-wrapper">
+    <app-poster-card *ngFor="let movie of topRatedMovies" [title]="movie.title"
+      [poster_path]="movie.poster_path"></app-poster-card>
+  </div>
+
+  <h1>Upcoming </h1>
+  <div class="scrolling-wrapper">
+    <app-poster-card *ngFor="let movie of upcomingMovies" [title]="movie.title"
+      [poster_path]="movie.poster_path"></app-poster-card>
+  </div>
+
+
+
+  <h1>topRatedShows </h1>
+  <div class="scrolling-wrapper">
+    <app-poster-card *ngFor="let show of topRatedShows" [title]="show.name"
+      [poster_path]="show.poster_path"></app-poster-card>
+  </div>
+
+
+  <h1>airingTodayShows </h1>
+  <div class="scrolling-wrapper">
+    <app-poster-card *ngFor="let show of airingTodayShows" [title]="show.name"
+      [poster_path]="show.poster_path"></app-poster-card>
+  </div>
+  
+  <h1>onAirShows </h1>
+  <div class="scrolling-wrapper">
+    <app-poster-card *ngFor="let show of onAirShows" [title]="show.name"
+      [poster_path]="show.poster_path"></app-poster-card>
+  </div>
+  
+  <h1>popularShows </h1>
+  <div class="scrolling-wrapper">
+    <app-poster-card *ngFor="let show of popularShows" [title]="show.name"
+      [poster_path]="show.poster_path"></app-poster-card>
+  </div> -->
+
+</ion-content>

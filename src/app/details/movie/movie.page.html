@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>movie</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">movie</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-img [src]="'https://image.tmdb.org/t/p/w1280'+ data.backdrop_path"
+  alt="The Wisconsin State Capitol building in Madison, WI at night"
+></ion-img>
+  <img [src]="'https://image.tmdb.org/t/p/w200'+ data.poster_path">
+ <h1>{{data.title}}</h1>
+ <ion-segment value="heart">
+  <ion-segment-button value="home">
+    Watchlist
+  </ion-segment-button>
+  <ion-segment-button value="heart">
+    Watching
+  </ion-segment-button>
+  <ion-segment-button value="pin">
+    Watched
+  </ion-segment-button>
+  <ion-segment-button value="star">
+    Abandoned
+  </ion-segment-button>
+</ion-segment>
+<ion-chip *ngFor="let genre of data.genres">{{genre.name}}</ion-chip>
+</ion-content>

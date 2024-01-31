@@ -1,0 +1,7 @@
+{
+  "name": "babi-watch-tracker",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
