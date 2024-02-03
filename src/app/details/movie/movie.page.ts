@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { ActionSheetController, IonicModule } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { MoviesService } from 'src/app/services/movies.service';
 
@@ -17,9 +17,11 @@ export class MoviePage implements OnInit {
   id;
   data;
 
+  result;
   constructor(
     private route: ActivatedRoute,
-    private movies: MoviesService
+    private movies: MoviesService,
+    private actionSheetCtrl: ActionSheetController
   ) { }
 
   ngOnInit() {
@@ -31,4 +33,42 @@ export class MoviePage implements OnInit {
     });
   }
 
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: 'Example header',
+      subHeader: 'Example subheader',
+      buttons: [
+        {
+          text: 'Delete',
+          role: 'destructive',
+          data: {
+            action: 'delete',
+          },
+        },
+        {
+          text: 'Share',
+          data: {
+            action: 'share',
+          },
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          data: {
+            action: 'cancel',
+          },
+        },
+      ],
+    });
+
+    await actionSheet.present();
+
+    const result = await actionSheet.onDidDismiss();
+    this.result = JSON.stringify(result, null, 2);
+  }
+
+
+  getBackground() {
+    return 'background-image: url("https://image.tmdb.org/t/p/w1280' + this.data.backdrop_path + '");   background-size: cover;    opacity: 0.5;'
+  }
 }

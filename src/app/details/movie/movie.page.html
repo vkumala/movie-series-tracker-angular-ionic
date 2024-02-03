@@ -10,12 +10,61 @@
       <ion-title size="large">movie</ion-title>
     </ion-toolbar>
   </ion-header>
+  <div style="display: flex;">
+
+    <img [src]="'https://image.tmdb.org/t/p/w200'+ data.poster_path">
+    <div style="padding: 0.5em; ">
+      <h1>{{data.title}}</h1>
+      <p>{{data.release_date}} | {{data.runtime}} minutes</p>
+      <ion-chip *ngFor="let genre of data.genres">{{genre.name}}</ion-chip>
+      <ion-chip color="success"><ion-icon name="thumbs-up-outline"></ion-icon> 
+     <ion-label>{{data.vote_average}}/10</ion-label></ion-chip>
+    </div>
+  </div>
+
+  <p>{{data.overview}}</p>
+  <ion-row>
+    <ion-col class="border">
+      <ion-button>
+        <ion-icon aria-hidden="true" name="list-outline"></ion-icon>
+      </ion-button>
+      <ion-label>Watchlist</ion-label>
+    </ion-col>
+    <ion-col class="border">
+      <ion-button>
+       <ion-icon aria-hidden="true" name="play-outline"></ion-icon>
+      </ion-button>
+      <ion-label>Now Watching</ion-label>
+    </ion-col>
+    <ion-col class="border">
+      <ion-button>
+       <ion-icon aria-hidden="true" name="eye-outline"></ion-icon>
+      </ion-button>
+      <ion-label>Watched</ion-label>
+    </ion-col>
+    <ion-col class="border">
+      <ion-button>
+       <ion-icon aria-hidden="true" name="trash"></ion-icon>
+      </ion-button>
+      <ion-label>Abandon</ion-label>
+    </ion-col>
+  </ion-row>
+<ion-button expand="block" (click)="presentActionSheet()"> Bewerten</ion-button>
+  <div>
+    <h1> {{data.title}}</h1>
+  </div>
+
+  <div [style]="getBackground()">
+
+    <img style="margin-left: 3em;    opacity: 1;" [src]="'https://image.tmdb.org/t/p/w200'+ data.poster_path">
+  </div>
+
   <img [src]="'https://image.tmdb.org/t/p/w1280'+ data.backdrop_path">
   <img [src]="'https://image.tmdb.org/t/p/w200'+ data.poster_path">
-  <h1>{{data.title}}</h1>
+  <h1 [style]="getBackground()">{{data.title}}</h1>
   <h3>{{data.release_date}}|{{data.runtime}} minutes</h3>
   <h5>{{data.overview}}</h5>
-
+  <p> asdsad</p>
   <ion-chip *ngFor="let genre of data.genres">{{genre.name}}</ion-chip>
   <h4>"{{data.tagline}}"</h4>
   <ion-row>
