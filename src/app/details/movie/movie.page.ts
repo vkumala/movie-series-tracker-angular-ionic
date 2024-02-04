@@ -13,13 +13,14 @@ import { OverlayEventDetail } from '@ionic/core/components';
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule]
 })
-export class MoviePage implements OnInit {
+export class MoviePage {
 
   id;
   data;
 
   result;
   imageUrl;
+  title;
   @ViewChild(IonModal) modal;
 
   message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
@@ -35,9 +36,10 @@ export class MoviePage implements OnInit {
   async ngOnInit() {
     this.id = this.route.snapshot.paramMap.get("id");
 
-    this.movies.getDetails(240).subscribe(async (res: any) => {
+    this.movies.getDetails(this.id).subscribe(async (res: any) => {
       this.data = res;
       this.imageUrl = 'https://image.tmdb.org/t/p/w200'+res.poster_path;
+      this.title = res.title
       console.log(this.imageUrl)
     });
   } cancel() {
