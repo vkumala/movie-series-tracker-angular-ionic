@@ -28,7 +28,7 @@ export const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/movie/240',
+        redirectTo: '/start',
         pathMatch: 'full',
       },
     ],

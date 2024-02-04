@@ -7,7 +7,16 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-button (click)="testFunction()">TEST</ion-button>
+  <ion-segment value="default">
+    <ion-segment-button value="default">
+      <ion-label>Default</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="segment">
+      <ion-label>Segment</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+<!--   <ion-button (click)="testFunction()">TEST</ion-button> -->
   <ion-searchbar animated="true" placeholder="Search a movie or TV show"></ion-searchbar>
   <h1>Now Playing </h1>
   <div class="scrolling-wrapper">

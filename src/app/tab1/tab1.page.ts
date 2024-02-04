@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonButton, IonTitle, IonCardSubtitle, IonCardTitle, IonContent, IonIcon, IonCard, IonChip, IonCardHeader, IonCol, IonRow, IonGrid, IonSearchbar } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonButton, IonTitle, IonCardSubtitle, IonCardTitle, IonContent, IonIcon, IonCard, IonChip, IonCardHeader, IonCol, IonRow, IonGrid, IonSearchbar, IonSegmentButton, IonSegment, IonLabel } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { MoviesService } from '../services/movies.service';
 import { CommonModule } from '@angular/common';
@@ -12,7 +12,7 @@ import { LocalStorageService } from '../services/local-storage.service';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
   standalone: true,
-  imports: [IonHeader, IonButton, PosterCardComponent, IonSearchbar, IonToolbar, IonChip, IonGrid, IonCol, IonRow, IonCardHeader, IonCardTitle, IonCardSubtitle, IonTitle, IonIcon, IonContent, ExploreContainerComponent, IonCard, CommonModule],
+  imports: [IonHeader, IonButton, IonSegment, IonLabel, IonSegmentButton,PosterCardComponent, IonSearchbar, IonToolbar, IonChip, IonGrid, IonCol, IonRow, IonCardHeader, IonCardTitle, IonCardSubtitle, IonTitle, IonIcon, IonContent, ExploreContainerComponent, IonCard, CommonModule],
 })
 export class Tab1Page {
 
