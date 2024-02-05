@@ -12,8 +12,9 @@ import { IonHeader, IonTitle, IonToolbar, IonContent, IonSegment, IonSegmentButt
   templateUrl: './start.page.html',
   styleUrls: ['./start.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, ReactiveFormsModule,FormsModule, PosterCardComponent
-  ]})
+  imports: [IonicModule, CommonModule, ReactiveFormsModule, FormsModule, PosterCardComponent
+  ]
+})
 export class StartPage implements OnInit {
 
   nowPlayingMovies: any;
@@ -21,29 +22,53 @@ export class StartPage implements OnInit {
   topRatedMovies: any;
   upcomingMovies: any;
 
-  segment = 'tv';
+  segment = 'movie';
   constructor(
     private movies: MoviesService,
-    //private shows: TvShowsService,
+    private shows: TvShowsService,
   ) { }
 
   ngOnInit() {
+    this.loadMovies();
+  }
+
+  loadMovies() {
     this.movies.getNowPlaying(1).subscribe((res: any) => {
       this.nowPlayingMovies = res.results;
     });
-
     this.movies.getPopular(1).subscribe((res: any) => {
       this.popularMovies = res.results;
     });
-
     this.movies.getTopRated(1).subscribe((res: any) => {
       this.topRatedMovies = res.results;
     });
-
     this.movies.getUpcoming(1).subscribe((res: any) => {
       this.upcomingMovies = res.results;
     });
-
   }
 
+  loadTvShows() {
+    this.shows.getAiringToday(1).subscribe((res: any) => {
+      this.nowPlayingMovies = res.results;
+    });
+    this.shows.getOnTheAir(1).subscribe((res: any) => {
+      this.popularMovies = res.results;
+    });
+    this.shows.getPopular(1).subscribe((res: any) => {
+      this.topRatedMovies = res.results;
+    });
+    this.shows.getTopRated(1).subscribe((res: any) => {
+      this.upcomingMovies = res.results;
+    });
+  }
+
+  segmentChanged(ev: any) {
+    this.segment = ev.detail.value;
+    if (this.segment == 'movie'){
+      this.loadMovies()
+    }else{
+      this.loadTvShows()
+    }
+    console.log('Segment changed', ev.detail.value);
+  }
 }
