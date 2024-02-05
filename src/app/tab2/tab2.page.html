@@ -7,15 +7,16 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-segment value="default">
-    <ion-segment-button value="default">
+  <ion-segment [(ngModel)]="segmentValue">
+    <ion-segment-button value="movies">
       <ion-label>Movies</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="segment">
+    <ion-segment-button value="tv-shows">
       <ion-label>TV-Shows</ion-label>
     </ion-segment-button>
   </ion-segment>
 
   <ion-searchbar animated="true" placeholder="Search a movie or TV show"></ion-searchbar>
+  <ion-button (click)="click()">asdas</ion-button>
   <app-explore-container name="Tab 2 page"></app-explore-container>
 </ion-content>

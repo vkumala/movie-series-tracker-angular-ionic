@@ -1,0 +1,25 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    column-gap: 1vw;
+    row-gap: 1vh;
+  }
+
+  ion-card-title{
+    font-size: 18px !important;
+}
+
+.scrolling-wrapper {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  padding: 10px;
+
+  .card {
+    display: inline-block;
+  }
+}
+
+h1{
+  padding-left: 1em;
+}

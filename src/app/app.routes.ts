@@ -9,7 +9,7 @@ export const routes: Routes = [
       {
         path: 'start',
         loadComponent: () =>
-          import('./tab1/tab1.page').then((m) => m.Tab1Page),
+          import('./tabs/start/start.page').then((m) => m.StartPage),
       },
       {
         path: 'watchlist',
@@ -39,9 +39,26 @@ export const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/movie',
+        redirectTo: '/start',
         pathMatch: 'full',
       },
     ],
   },
+/*   {
+    path: 'start',
+    loadComponent: () => import('./tabs/start/start.page').then( m => m.StartPage)
+  },
+  {
+    path: 'watchlist',
+    loadComponent: () => import('./tabs/watchlist/watchlist.page').then( m => m.WatchlistPage)
+  },
+  {
+    path: 'watching',
+    loadComponent: () => import('./tabs/watching/watching.page').then( m => m.WatchingPage)
+  },
+  {
+    path: 'watched',
+    loadComponent: () => import('./tabs/watched/watched.page').then( m => m.WatchedPage)
+  }, */
+
 ];

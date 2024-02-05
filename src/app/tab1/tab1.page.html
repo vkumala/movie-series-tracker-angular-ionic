@@ -20,8 +20,8 @@
   <ion-searchbar animated="true" placeholder="Search a movie or TV show"></ion-searchbar>
   <h1>Now Playing </h1>
   <div class="scrolling-wrapper">
-    <app-poster-card *ngFor="let movie of nowPlayingMovies" [title]="movie.title"
-      [poster_path]="movie.poster_path"></app-poster-card>
+    <app-poster-card *ngFor="let movie of nowPlayingMovies" [data]="movie" [isMovie]="true"
+     ></app-poster-card>
   </div>
 <!-- 
   <h1>Popular </h1>

@@ -1,0 +1,53 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Startseite
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  
+  <ion-segment  [value]="segment">
+    <ion-segment-button value="movie">
+      <ion-label>Movies</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="tv">
+      <ion-label>TV-Shows</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+
+  <ion-searchbar animated="true" placeholder="Search a movie or TV show"></ion-searchbar>
+
+  <h1>Now Playing </h1>
+  <div class="scrolling-wrapper">
+    <app-poster-card *ngFor="let movie of nowPlayingMovies" [data]="movie" [isMovie]="true"
+     ></app-poster-card>
+  </div>
+
+
+  <div [ngSwitch]="segment">
+    <ion-card *ngSwitchCase="'movie'">
+      <ion-card-header>
+        First Content
+      </ion-card-header>
+      <ion-card-content>
+        First Content here
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngSwitchCase="'tv'">
+      <ion-card-header>
+        Second Header
+      </ion-card-header>
+      <ion-card-content>
+        Second content here
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+
+
+
+</ion-content>

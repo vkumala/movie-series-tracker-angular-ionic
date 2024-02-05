@@ -4,25 +4,26 @@ import { FormsModule } from '@angular/forms';
 import { ActionSheetController, IonicModule, IonModal } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { MoviesService } from 'src/app/services/movies.service';
-
+import { YouTubePlayerModule } from '@angular/youtube-player';
 import { OverlayEventDetail } from '@ionic/core/components';
 @Component({
   selector: 'app-movie',
   templateUrl: './movie.page.html',
   styleUrls: ['./movie.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule,YouTubePlayerModule ]
 })
 export class MoviePage {
 
   id;
   data;
-
+  videoWidth: any;
+  videoHeight: any;
   result;
   imageUrl;
   title;
   @ViewChild(IonModal) modal;
-
+  trailerKey: string;
   message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
   name;
 
@@ -34,13 +35,19 @@ export class MoviePage {
   ) { }
 
   async ngOnInit() {
+    this.videoWidth = window.innerWidth;
+    this.videoHeight = 9*window.innerWidth/16;
     this.id = this.route.snapshot.paramMap.get("id");
 
     this.movies.getDetails(this.id).subscribe(async (res: any) => {
       this.data = res;
       this.imageUrl = 'https://image.tmdb.org/t/p/w200'+res.poster_path;
       this.title = res.title
-      console.log(this.imageUrl)
+    });
+
+    this.movies.getTrailerYoutubeId(this.id).subscribe(async (res: any) => {
+      this.trailerKey = res['results'].find(o => o.site === 'YouTube' &&  o.type === 'Trailer'  &&  o.official === true )['key'];
+
     });
   } cancel() {
     this.modal.dismiss(null, 'cancel');
@@ -49,7 +56,6 @@ export class MoviePage {
   confirm() {
     this.modal.dismiss(this.name, 'confirm');
   }
-
   onWillDismiss(event: Event) {
     const ev = event as CustomEvent<OverlayEventDetail<string>>;
     if (ev.detail.role === 'confirm') {
