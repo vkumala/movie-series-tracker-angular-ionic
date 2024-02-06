@@ -17,12 +17,16 @@ import { IonHeader, IonTitle, IonToolbar, IonContent, IonSegment, IonSegmentButt
 })
 export class StartPage implements OnInit {
 
-  nowPlayingMovies: any;
-  popularMovies: any;
-  topRatedMovies: any;
-  upcomingMovies: any;
+  movieLists = ['Now Playing', 'Popular', 'Top Rated', 'Upcoming']
+  tvShowsLists = ['Airing Today', 'On The Air', 'Popular', 'Top Rated']
 
+  firstList: any;
+  secondList: any;
+  thirdList: any;
+  fourthList: any;
+isMovie: boolean;
   segment = 'movie';
+  lists;
   constructor(
     private movies: MoviesService,
     private shows: TvShowsService,
@@ -33,32 +37,36 @@ export class StartPage implements OnInit {
   }
 
   loadMovies() {
+    this.lists = this.movieLists;
+    this.isMovie = true;
     this.movies.getNowPlaying(1).subscribe((res: any) => {
-      this.nowPlayingMovies = res.results;
+      this.firstList = res.results;
     });
     this.movies.getPopular(1).subscribe((res: any) => {
-      this.popularMovies = res.results;
+      this.secondList = res.results;
     });
     this.movies.getTopRated(1).subscribe((res: any) => {
-      this.topRatedMovies = res.results;
+      this.thirdList = res.results;
     });
     this.movies.getUpcoming(1).subscribe((res: any) => {
-      this.upcomingMovies = res.results;
+      this.fourthList = res.results;
     });
   }
 
   loadTvShows() {
+    this.lists = this.tvShowsLists;
+    this.isMovie = false;
     this.shows.getAiringToday(1).subscribe((res: any) => {
-      this.nowPlayingMovies = res.results;
+      this.firstList = res.results;
     });
     this.shows.getOnTheAir(1).subscribe((res: any) => {
-      this.popularMovies = res.results;
+      this.secondList = res.results;
     });
     this.shows.getPopular(1).subscribe((res: any) => {
-      this.topRatedMovies = res.results;
+      this.thirdList = res.results;
     });
     this.shows.getTopRated(1).subscribe((res: any) => {
-      this.upcomingMovies = res.results;
+      this.fourthList = res.results;
     });
   }
 
@@ -69,6 +77,5 @@ export class StartPage implements OnInit {
     }else{
       this.loadTvShows()
     }
-    console.log('Segment changed', ev.detail.value);
   }
 }

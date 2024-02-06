@@ -28,12 +28,7 @@ export const routes: Routes = [
       },
 
       {
-        path: 'movie/:id',
-        loadComponent: () =>
-          import('./details/movie/movie.page').then((m) => m.MoviePage),
-      },
-      {
-        path: 'tv-shows/:id',
+        path: ':type/:id',
         loadComponent: () =>
           import('./details/movie/movie.page').then((m) => m.MoviePage),
       },

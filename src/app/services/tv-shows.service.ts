@@ -34,4 +34,13 @@ export class TvShowsService {
     return this.http.get(`${this.baseUrl}tv/top_rated?api_key=${this.apiKey}&page=${page}&language=${this.language}&region=${this.region}`)
   }
 
+  getDetails(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}tv/${id}?api_key=${this.apiKey}`)
+  }
+
+  getTrailerYoutubeId(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}tv/${id}/videos?api_key=${this.apiKey}`)
+  }
+
+
 }

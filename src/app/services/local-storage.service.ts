@@ -18,29 +18,33 @@ export class LocalStorageService {
     }
   }
 
-  public addToWatchlist(id) {
-    const index = this.data.findIndex(p => p.id === id)
+  public addToWatchlist(type, id) {
+    console.log("this.data", this.data)
+    const index = this.data.findIndex(p => p.id === id && p.type === type)
     if (index < 0) {
-      this.data.push({ 'id': id, 'status': 'watchlist', 'timestamp_watchlist': new Date() })
-      localStorage.setItem(this.key, JSON.stringify(this.data));
-    }
+      this.data.push({ 'id': id, 'type': type, 'status': 'watchlist', 'timestamp_watchlist': new Date() })
+
+    } else {
+      this.data[index]['status'] = 'watchlist';
+      this.data[index]['timestamp_watchlist'] = new Date();
+    }      localStorage.setItem(this.key, JSON.stringify(this.data));
     //TODO: if id already there
 
   }
-  public addToWatching(id) {
-    const index = this.data.findIndex(p => p.id === id)
+  public addToWatching(type, id) {
+    const index = this.data.findIndex(p => p.id === id && p.type === type)
     if (index < 0) {
-      this.data.push({ 'id': id, 'status': 'watching', 'timestamp_watching': new Date() })
+      this.data.push({ 'id': id, 'type': type, 'status': 'watching', 'timestamp_watching': new Date() })
     } else {
       this.data[index]['status'] = 'watching';
       this.data[index]['timestamp_watching'] = new Date();
     }
     localStorage.setItem(this.key, JSON.stringify(this.data));
   }
-  public addToWatched(id) {
-    const index = this.data.findIndex(p => p.id === id)
+  public addToWatched(type, id) {
+    const index = this.data.findIndex(p => p.id === id && p.type === type)
     if (index < 0) {
-      this.data.push({ 'id': id, 'status': 'watched', 'timestamp_watched': new Date() })
+      this.data.push({ 'id': id, 'type': type,'status': 'watched', 'timestamp_watched': new Date() })
     } else {
       this.data[index]['status'] = 'watched';
       this.data[index]['timestamp_watched'] = new Date();
@@ -48,10 +52,10 @@ export class LocalStorageService {
     localStorage.setItem(this.key, JSON.stringify(this.data));
   }
 
-  public addRating(id, rating, note = '') {
-    const index = this.data.findIndex(p => p.id === id)
+  public addRating(type, id, rating, note = '') {
+    const index = this.data.findIndex(p => p.id === id && p.type === type)
     if (index < 0) {
-      this.data.push({ 'id': id, 'status': 'watched', 'rating': rating, 'note': note ,'timestamp_rated': new Date() })
+      this.data.push({ 'id': id, 'type': type,'status': 'watched', 'rating': rating, 'note': note, 'timestamp_rated': new Date() })
     } else {
       this.data[index]['status'] = 'watched';
       this.data[index]['rating'] = rating;
@@ -61,10 +65,10 @@ export class LocalStorageService {
     localStorage.setItem(this.key, JSON.stringify(this.data));
   }
 
-  public addToAbandoned(id, note = '') {
-    const index = this.data.findIndex(p => p.id === id)
+  public addToAbandoned(type, id, note = '') {
+    const index = this.data.findIndex(p => p.id === id && p.type === type)
     if (index < 0) {
-      this.data.push({ 'id': id, 'status': 'abandoned', 'note': note, 'timestamp_abandoned': new Date() })
+      this.data.push({ 'id': id, 'type': type,'status': 'abandoned', 'note': note, 'timestamp_abandoned': new Date() })
     } else {
       this.data[index]['status'] = 'abandoned';
       this.data[index]['note'] = note;

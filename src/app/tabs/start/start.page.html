@@ -8,7 +8,7 @@
 
 <ion-content [fullscreen]="true">
 
-  <ion-segment [value]="segment" (ionChange)="segmentChanged($event)" >
+  <ion-segment [value]="segment" (ionChange)="segmentChanged($event)">
     <ion-segment-button value="movie">
       <ion-label>Movies</ion-label>
     </ion-segment-button>
@@ -20,32 +20,27 @@
 
   <ion-searchbar animated="true" placeholder="Search a movie or TV show"></ion-searchbar>
 
-  <h1>Now Playing </h1>
+  <h1>{{lists[0]}} </h1>
   <div class="scrolling-wrapper">
-    <app-poster-card *ngFor="let movie of nowPlayingMovies" [data]="movie" [isMovie]="true"></app-poster-card>
+    <app-poster-card *ngFor="let movie of firstList" [data]="movie" [isMovie]="isMovie"></app-poster-card>
   </div>
 
-
-  <div [ngSwitch]="segment">
-    <ion-card *ngSwitchCase="'movie'">
-      <ion-card-header>
-        First Content
-      </ion-card-header>
-      <ion-card-content>
-        First Content here
-      </ion-card-content>
-    </ion-card>
-
-    <ion-card *ngSwitchCase="'tv'">
-      <ion-card-header>
-        Second Header
-      </ion-card-header>
-      <ion-card-content>
-        Second content here
-      </ion-card-content>
-    </ion-card>
-
+  <h1>{{lists[1]}} </h1>
+  <div class="scrolling-wrapper">
+    <app-poster-card *ngFor="let movie of secondList" [data]="movie" [isMovie]="isMovie"></app-poster-card>
   </div>
+
+  <h1>{{lists[2]}} </h1>
+  <div class="scrolling-wrapper">
+    <app-poster-card *ngFor="let movie of thirdList" [data]="movie" [isMovie]="isMovie"></app-poster-card>
+  </div>
+
+  <h1>{{lists[3]}} </h1>
+  <div class="scrolling-wrapper">
+    <app-poster-card *ngFor="let movie of fourthList" [data]="movie" [isMovie]="isMovie"></app-poster-card>
+  </div>
+
+  
 
 
 

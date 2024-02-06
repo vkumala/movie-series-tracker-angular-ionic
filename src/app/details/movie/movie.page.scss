@@ -1,9 +1,23 @@
 .border {
     text-align: center;
-    border: 3px solid green;
+    // border: 3px solid green;
   }
 
   img{
     
   opacity: 1 !important;
+  }
+
+  .star {
+    font-size: 2em; 
+    color: orange;
+  }
+
+  .rating{
+    font-size: 4em; 
+    color: orange ;
+  } 
+   .rating2{
+    font-size: 4em; 
+    color: blue ;
   }
