@@ -1,19 +1,19 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button default-href="#"></ion-back-button>
     </ion-buttons>
-    <ion-title>Back Button</ion-title>
+    <ion-title>Movie</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
 
-
-
   <div style="display: flex;">
     <img [src]="imageUrl">
-    <div>
+
+
+    <div class="container" [style]="   getBackground()
+    ">
       <h1>{{title}}</h1>
       <p>{{data?.release_date ||data?.first_air_date}} | {{data?.runtime || data?.episode_run_time}} minutes</p>
       <ion-chip *ngFor="let genre of data?.genres">{{genre.name}}</ion-chip>
@@ -30,63 +30,67 @@
   <ion-label>Add to: </ion-label>
   <ion-row>
     <ion-col class="border">
-      <ion-button (click)="addTo('watchlist')">
+      <ion-button [disabled]="mydata?.status === 'watchlist'" (click)="addTo('watchlist')">
         <ion-icon aria-hidden="true" name="list-outline"></ion-icon>
       </ion-button>
     </ion-col>
     <ion-col class="border">
-      <ion-button (click)="addTo('watching')">
+      <ion-button [disabled]="mydata?.status === 'watching'" (click)="addTo('watching')">
         <ion-icon aria-hidden="true" name="play-outline"></ion-icon>
       </ion-button>
     </ion-col>
     <ion-col class="border">
-      <ion-button (click)="addTo('watched')">
+      <ion-button [disabled]="mydata?.status === 'watched'" (click)="addTo('watched')">
         <ion-icon aria-hidden="true" name="eye-outline"></ion-icon>
       </ion-button>
     </ion-col>
     <ion-col class="border">
-      <ion-button (click)="addTo('abandoned')">
+      <ion-button [disabled]="mydata?.status === 'abandoned'" (click)="addTo('abandoned')">
         <ion-icon aria-hidden="true" name="trash"></ion-icon>
       </ion-button>
+
     </ion-col>
   </ion-row>
 
   <ion-row>
-    
-  <ion-col class="border"> <ion-label>Watchlist</ion-label></ion-col>
-  
-  <ion-col class="border"> <ion-label>Now Watching</ion-label></ion-col>
-  
-  <ion-col class="border"> <ion-label>Watched</ion-label></ion-col>
-  
-  <ion-col class="border"> <ion-label>Abandon</ion-label></ion-col>
+
+    <ion-col class="border"> <ion-label>Watchlist</ion-label></ion-col>
+
+    <ion-col class="border"> <ion-label>Now Watching</ion-label></ion-col>
+
+    <ion-col class="border"> <ion-label>Watched</ion-label></ion-col>
+
+    <ion-col class="border"> <ion-label>Abandon</ion-label></ion-col>
   </ion-row>
   <ion-row class="ion-align-items-center ion-justify-content-center">
     <ion-col class="border">
       <div style="display: inline-grid;">
         <ion-icon aria-hidden="true" name="star" class="rating"></ion-icon>
         <ion-label>{{data?.vote_average}}/10</ion-label>
-        <ion-label>{{data?.vote_count}}</ion-label>
+        <ion-label>{{data?.vote_count}} Stimme</ion-label>
       </div>
 
     </ion-col>
     <ion-col class="border">
-      <div style="display: inline-grid;">
-        <ion-button (click)="setOpen(true)" style="display: inline-grid;">
+      <ion-button *ngIf="!rating;else other_content" (click)="setOpen(true)" style="display: inline-grid;">
+        <div><ion-icon aria-hidden="true" name="star" class="rating2"></ion-icon></div>
+        <div>Bewerten</div>
+      </ion-button>
 
+      <ng-template #other_content>
+        <div style="display: inline-grid;align-items:center">
+          <ion-icon aria-hidden="true" name="star" class="rating"></ion-icon>
+          <ion-label>{{mydata?.rating}}/10</ion-label>
+          <ion-label>Ihre BEwertung</ion-label>
+        </div>
 
-          <div><ion-icon aria-hidden="true" name="star" class="rating2"></ion-icon></div>
-          <div>Bewerten</div>
-        </ion-button>
-      </div>
-
+      </ng-template>
     </ion-col>
   </ion-row>
 
   <ion-label>Trailer: </ion-label>
   <youtube-player [videoId]="trailerKey" [width]="videoWidth" [height]="videoHeight"></youtube-player>
-
-
+  <app-casts [id]="id" [type]="type"></app-casts>
 </ion-content>
 
 

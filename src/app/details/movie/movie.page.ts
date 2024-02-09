@@ -8,18 +8,21 @@ import { YouTubePlayerModule } from '@angular/youtube-player';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { TvShowsService } from 'src/app/services/tv-shows.service';
+import Utils from '../../utils'
+import { CastsComponent } from '../casts/casts.component';
 @Component({
   selector: 'app-movie',
   templateUrl: './movie.page.html',
   styleUrls: ['./movie.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, YouTubePlayerModule]
+  imports: [IonicModule, CommonModule, FormsModule, YouTubePlayerModule, CastsComponent]
 })
 export class MoviePage {
 
   id;
   type;
   data;
+  mydata;
   videoWidth: any;
   videoHeight: any;
   rating;
@@ -27,9 +30,8 @@ export class MoviePage {
   title;
   @ViewChild(IonModal) modal;
   trailerKey: string;
-  message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
-  name;isModalOpen=false;
-note;
+   name; isModalOpen = false;
+  note;
 
   constructor(
     private route: ActivatedRoute,
@@ -38,32 +40,32 @@ note;
     private storage: LocalStorageService,
   ) { }
 
-  async ngOnInit() {
-    this.rating=0;
-    this.videoWidth = window.innerWidth;
-    this.videoHeight = 9 * window.innerWidth / 16;
+  ngOnInit() {
+    this.videoWidth = window.innerWidth < 640? window.innerWidth:640 ;
+    this.videoHeight = 9 * this.videoWidth / 16;
     this.id = this.route.snapshot.paramMap.get("id");
     this.type = this.route.snapshot.paramMap.get("type");
     console.log(this.type, "!!!!")
+    this.mydata = this.storage.getItem(this.type, this.id)
+    this.rating = this.mydata?.rating ? this.mydata?.rating : undefined;
     if (this.type === 'movie') {
       this.movies.getDetails(this.id).subscribe(async (res: any) => {
         this.data = res;
-        this.imageUrl = 'https://image.tmdb.org/t/p/w200' + res.poster_path;
+        console.log(res)
+        this.imageUrl = Utils.getImageLink(200, res.poster_path);
         this.title = res.title
       });
       this.movies.getTrailerYoutubeId(this.id).subscribe(async (res: any) => {
-        console.log(res['results'])
         this.trailerKey = res['results'].find(o => o.site === 'YouTube' && o.type === 'Trailer' && o.official === true)?.key;
       });
     }
     else {
       this.tv.getDetails(this.id).subscribe(async (res: any) => {
         this.data = res;
-        this.imageUrl = 'https://image.tmdb.org/t/p/w200' + res.poster_path;
+        this.imageUrl = Utils.getImageLink(200, res.poster_path);
         this.title = res.name
       });
       this.tv.getTrailerYoutubeId(this.id).subscribe(async (res: any) => {
-        console.log(res['results'])
         this.trailerKey = res['results'].find(o => o.site === 'YouTube' && o.type === 'Trailer')?.key;
         //TODO: check if no videos!
       });
@@ -80,15 +82,13 @@ note;
     this.modal.dismiss(this.name, 'confirm');
   }
 
-  saveRating(){
+  saveRating() {
     this.storage.addRating(this.type, this.id, this.rating, this.note)
     this.setOpen(false)
   }
   onWillDismiss(event: Event) {
     const ev = event as CustomEvent<OverlayEventDetail<string>>;
-    if (ev.detail.role === 'confirm') {
-      this.message = `Hello, ${ev.detail.data}!`;
-    }
+
   }
 
   rate(star: number) {
@@ -107,12 +107,15 @@ note;
     } else if (listType === 'watching') {
       this.storage.addToWatching(this.type, this.id)
     } else if (listType === 'watched') {
+      this.setOpen(true)
       this.storage.addToWatched(this.type, this.id)
     } else {
       this.storage.addToAbandoned(this.type, this.id)
     }
+    console.log(this.mydata)
   }
-  /*   getBackground() {
-      return 'background-image: url("https://image.tmdb.org/t/p/w1280' + this.data.backdrop_path + '");   background-size: cover;    opacity: 0.5;'
-    } */
+  
+   getBackground() {
+      return 'background-image: url("https://image.tmdb.org/t/p/w1280' + this.data?.backdrop_path + '");';
+   }
 }

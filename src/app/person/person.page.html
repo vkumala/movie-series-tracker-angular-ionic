@@ -1,0 +1,55 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+    </ion-buttons>
+
+    <ion-title>Person</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+
+  <div style="display: flex;">
+    <img [src]="imageUrl">
+    <div>
+      <h1>{{data?.name}}</h1>
+      <p>{{data?.place_of_birth}} </p>
+      <p>{{data?.birthday}} </p>
+
+    </div>
+  </div>
+  <!--<p>{{data?.biography}}</p> -->
+
+
+  <h1>
+    Movies:
+  </h1>
+
+  <div class="scrolling-wrapper">
+
+
+  
+    <ion-card *ngFor="let credit of credits1"  [routerLink]="'/movie/' + credit.id"  style="display: inline-block;width: 150px;">
+      <img [src]="'https://image.tmdb.org/t/p/w300'+ credit.poster_path">
+      <ion-card-header>
+        <ion-card-title>{{credit.name ||credit.title}}</ion-card-title>
+        <ion-card-subtitle>{{credit.character ||credit.character}} </ion-card-subtitle>
+        <ion-card-subtitle>{{credit.release_date ||credit.first_air_date}} </ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+  </div>  <h1>
+    TV:
+  </h1>
+
+  <div class="scrolling-wrapper">
+    <ion-card *ngFor="let credit of credits2"  [routerLink]="'/tv/' + credit.id"  style="display: inline-block;width: 150px;">
+      <img [src]="'https://image.tmdb.org/t/p/w300'+ credit.poster_path">
+      <ion-card-header>
+        <ion-card-title>{{credit.name ||credit.title}}</ion-card-title>
+        <ion-card-subtitle>{{credit.character ||credit.character}} </ion-card-subtitle>
+        <ion-card-subtitle>{{credit.release_date ||credit.first_air_date}} </ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+  </div>
+</ion-content>

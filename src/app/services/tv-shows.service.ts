@@ -41,6 +41,9 @@ export class TvShowsService {
   getTrailerYoutubeId(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}tv/${id}/videos?api_key=${this.apiKey}`)
   }
-
+  
+  getCredits(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}tv/${id}/credits?api_key=${this.apiKey}`)
+  }
 
 }

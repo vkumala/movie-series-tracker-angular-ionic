@@ -10,4 +10,9 @@
       <ion-title size="large">watchlist</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <app-poster-card *ngFor="let movie of myList" [data]="movie" [isMovie]="true
+  "></app-poster-card>
+ 
+
 </ion-content>

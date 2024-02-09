@@ -1,22 +1,22 @@
 <ion-tabs>
 
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="start" href="/start">
+    <ion-tab-button tab="start" [routerLink]="'/start'">
       <ion-icon aria-hidden="true" name="home"></ion-icon>
       <ion-label>Startseite</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="watchlist" href="/watchlist">
+    <ion-tab-button tab="watchlist"  [routerLink]="'/watchlist'">
       <ion-icon aria-hidden="true" name="list-outline"></ion-icon>
       <ion-label>Watchlist</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="now_watching" href="/now_watching">
+    <ion-tab-button tab="now_watching"   [routerLink]="'/now_watching'">
       <ion-icon aria-hidden="true" name="play-outline"></ion-icon>
       <ion-label>Now Watching</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="watched" href="/watched">
+    <ion-tab-button tab="watched"  [routerLink]="'/watched'">
       <ion-icon aria-hidden="true" name="eye-outline"></ion-icon>
       <ion-label>Watched</ion-label>
     </ion-tab-button>

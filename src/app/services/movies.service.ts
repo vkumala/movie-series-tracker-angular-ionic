@@ -15,7 +15,7 @@ export class MoviesService {
     this.baseUrl = 'https://api.themoviedb.org/3/';
     this.apiKey = '7de54a5896e6febb5edc13f9ac762b20';
     this.language = 'en-US';
-    this.region = 'DE'
+    this.region = 'US'
   }
 
 
@@ -44,4 +44,10 @@ export class MoviesService {
     return this.http.get(`${this.baseUrl}movie/${id}/videos?api_key=${this.apiKey}`)
   }
 
+  getCredits(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}movie/${id}/credits?api_key=${this.apiKey}`)
+  }
+  getRecomendations(id: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}movie/${ id}/recommendations?api_key=${this.apiKey}`)
+  }
 }

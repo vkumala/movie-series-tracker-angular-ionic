@@ -28,6 +28,10 @@ export const routes: Routes = [
       },
 
       {
+        path: 'person/:id',
+        loadComponent: () => import('./person/person.page').then( m => m.PersonPage)
+      },
+      {
         path: ':type/:id',
         loadComponent: () =>
           import('./details/movie/movie.page').then((m) => m.MoviePage),
@@ -39,5 +43,6 @@ export const routes: Routes = [
       },
     ],
   },
+
 
 ];

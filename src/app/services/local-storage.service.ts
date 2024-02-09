@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { MoviesService } from './movies.service';
+import { TvShowsService } from './tv-shows.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +10,11 @@ export class LocalStorageService {
   key: string;
   data: Array<any>;
 
-  constructor() {
+  constructor(
+    private movies: MoviesService,
+    private tvshows: TvShowsService,
+  ) {
+
     this.key = 'babi-watch-tracker';
     if (localStorage.getItem(this.key) === null) {
       localStorage.setItem(this.key, JSON.stringify([]))
@@ -27,7 +33,7 @@ export class LocalStorageService {
     } else {
       this.data[index]['status'] = 'watchlist';
       this.data[index]['timestamp_watchlist'] = new Date();
-    }      localStorage.setItem(this.key, JSON.stringify(this.data));
+    } localStorage.setItem(this.key, JSON.stringify(this.data));
     //TODO: if id already there
 
   }
@@ -44,7 +50,7 @@ export class LocalStorageService {
   public addToWatched(type, id) {
     const index = this.data.findIndex(p => p.id === id && p.type === type)
     if (index < 0) {
-      this.data.push({ 'id': id, 'type': type,'status': 'watched', 'timestamp_watched': new Date() })
+      this.data.push({ 'id': id, 'type': type, 'status': 'watched', 'timestamp_watched': new Date() })
     } else {
       this.data[index]['status'] = 'watched';
       this.data[index]['timestamp_watched'] = new Date();
@@ -55,7 +61,7 @@ export class LocalStorageService {
   public addRating(type, id, rating, note = '') {
     const index = this.data.findIndex(p => p.id === id && p.type === type)
     if (index < 0) {
-      this.data.push({ 'id': id, 'type': type,'status': 'watched', 'rating': rating, 'note': note, 'timestamp_rated': new Date() })
+      this.data.push({ 'id': id, 'type': type, 'status': 'watched', 'rating': rating, 'note': note, 'timestamp_rated': new Date() })
     } else {
       this.data[index]['status'] = 'watched';
       this.data[index]['rating'] = rating;
@@ -68,7 +74,7 @@ export class LocalStorageService {
   public addToAbandoned(type, id, note = '') {
     const index = this.data.findIndex(p => p.id === id && p.type === type)
     if (index < 0) {
-      this.data.push({ 'id': id, 'type': type,'status': 'abandoned', 'note': note, 'timestamp_abandoned': new Date() })
+      this.data.push({ 'id': id, 'type': type, 'status': 'abandoned', 'note': note, 'timestamp_abandoned': new Date() })
     } else {
       this.data[index]['status'] = 'abandoned';
       this.data[index]['note'] = note;
@@ -77,9 +83,35 @@ export class LocalStorageService {
     localStorage.setItem(this.key, JSON.stringify(this.data));
   }
 
-  public getWatchlist() {
-    return this.data.filter(e => e.status === 'watchlist');
+  public getItem(type, id) {
+
+    const index = this.data.findIndex(p => p.id === id && p.type === type)
+    if (index > 0) {
+      return this.data[index]
+    }
+    else {
+      return {}
+    }
   }
+
+  public getWatchlist() {
+    let watchlist = this.data.filter(e => e.status === 'watchlist')
+    /* let moviesss : any[];
+    moviesss = []
+    for (var item of watchlist) {
+      if (item.type === 'movie') {
+        this.movies.getDetails(item.id).subscribe((res: any) => {
+ 
+
+          moviesss.push(res)
+          console.log(moviesss)
+        });
+      }
+    }
+    console.log(moviesss) */
+    return watchlist
+  }
+
   public getWatching() {
     return this.data.filter(e => e.status === 'watching');
   }

@@ -21,3 +21,23 @@
     font-size: 4em; 
     color: blue ;
   }
+  
+  .container{
+    flex-grow: 1;
+    position:relative;
+  }
+  
+  .container::before{
+    content:"";
+    // background-image: url('https://image.tmdb.org/t/p/w1280//nTPFkLUARmo1bYHfkfdNpRKgEOs.jpg');
+    background-position-x: center;
+    opacity:0.5;
+    position:absolute;
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+
+
+  }
+  

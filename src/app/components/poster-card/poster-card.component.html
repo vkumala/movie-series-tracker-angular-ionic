@@ -1,11 +1,10 @@
-<a  [routerLink]="isMovie ? '/movie/' + data.id : '/tv-show/' + data.id" >
-  
-<ion-card style="display: inline-block;width: 150px;">
-  <img [src]="'https://image.tmdb.org/t/p/w300'+ data.poster_path">
-  <ion-card-header>
-    <ion-card-title>{{data.title || data.name }}</ion-card-title>
-  </ion-card-header>
- <!--  <ion-button size="small" fill="clear">
+
+  <ion-card style="display: inline-block;width: 150px;" [routerLink]="isMovie ? '/movie/' + data.id : '/tv-show/' + data.id">
+    <img [src]="'https://image.tmdb.org/t/p/w300'+ data.poster_path">
+    <ion-card-header>
+      <ion-card-title>{{data.title || data.name }}</ion-card-title>
+    </ion-card-header>
+    <!--  <ion-button size="small" fill="clear">
     <ion-icon name="bookmark-outline"></ion-icon>
   </ion-button>
   <ion-button size="small" fill="clear">
@@ -14,5 +13,4 @@
   <ion-button size="small" fill="clear">
     <ion-icon name="star-outline"></ion-icon>
   </ion-button> -->
-</ion-card>
-</a>
+  </ion-card>
