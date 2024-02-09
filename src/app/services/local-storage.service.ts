@@ -94,8 +94,8 @@ export class LocalStorageService {
     }
   }
 
-  public getWatchlist() {
-    let watchlist = this.data.filter(e => e.status === 'watchlist')
+  public getWatchlist(type:string) {
+    let watchlist = this.data.filter(e => e.status === 'watchlist'&& e.type===type)
     /* let moviesss : any[];
     moviesss = []
     for (var item of watchlist) {

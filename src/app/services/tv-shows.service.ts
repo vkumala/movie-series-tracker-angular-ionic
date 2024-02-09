@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +41,15 @@ export class TvShowsService {
   getTrailerYoutubeId(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}tv/${id}/videos?api_key=${this.apiKey}`)
   }
-  
+    
+  getMultipleDetails(list: number[]): Observable<any> {
+    let allAPI: any[] = [];
+    for (const item of list) {
+      let api = this.http.get(`${this.baseUrl}tv/${item['id']}?api_key=${this.apiKey}`)
+      allAPI.push(api)
+    }
+    return forkJoin(allAPI)
+  }
   getCredits(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}tv/${id}/credits?api_key=${this.apiKey}`)
   }
