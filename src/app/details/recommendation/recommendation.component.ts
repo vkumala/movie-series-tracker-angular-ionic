@@ -7,18 +7,19 @@ import { MoviesService } from 'src/app/services/movies.service';
 import { TvShowsService } from 'src/app/services/tv-shows.service';
 
 @Component({
-  selector: 'app-casts',
-  templateUrl: './casts.component.html',
-  styleUrls: ['./casts.component.scss'],
+  selector: 'app-recommendation',
+  templateUrl: './recommendation.component.html',
+  styleUrls: ['./recommendation.component.scss'],
   standalone: true,
   imports: [RouterLink, IonicModule, CommonModule, FormsModule,]
 })
-export class CastsComponent implements OnInit {
+export class RecommendationComponent  implements OnInit {
 
   @Input() id: number;
   @Input() type: string;
 
-  casts: Array<any>;
+  
+  recommendations: Array<any>;
 
   constructor(
     private movies: MoviesService,
@@ -27,12 +28,12 @@ export class CastsComponent implements OnInit {
 
   ngOnInit() {
     if (this.type === 'movie') {
-      this.movies.getCredits(this.id).subscribe(async (res: any) => {
-        this.casts = res.cast
+      this.movies.getRecomendations(this.id).subscribe(async (res: any) => {
+        this.recommendations = res.results
       });
     } else {
-      this.tv.getCredits(this.id).subscribe(async (res: any) => {
-        this.casts = res.cast
+      this.tv.getRecomendations(this.id).subscribe(async (res: any) => {
+        this.recommendations = res.results
       });
     }
   }

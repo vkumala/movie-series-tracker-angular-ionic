@@ -10,12 +10,13 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { TvShowsService } from 'src/app/services/tv-shows.service';
 import Utils from '../../utils'
 import { CastsComponent } from '../casts/casts.component';
+import { RecommendationComponent } from '../recommendation/recommendation.component';
 @Component({
   selector: 'app-movie',
   templateUrl: './movie.page.html',
   styleUrls: ['./movie.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, YouTubePlayerModule, CastsComponent]
+  imports: [IonicModule, CommonModule, FormsModule, YouTubePlayerModule, CastsComponent, RecommendationComponent]
 })
 export class MoviePage {
 

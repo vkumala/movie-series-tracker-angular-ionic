@@ -56,7 +56,7 @@ export class MoviesService {
   getCredits(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}movie/${id}/credits?api_key=${this.apiKey}`)
   }
-  getRecomendations(id: string): Observable<any> {
+  getRecomendations(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}movie/${id}/recommendations?api_key=${this.apiKey}`)
   }
 }

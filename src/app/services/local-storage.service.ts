@@ -95,28 +95,15 @@ export class LocalStorageService {
   }
 
   public getWatchlist(type:string) {
-    let watchlist = this.data.filter(e => e.status === 'watchlist'&& e.type===type)
-    /* let moviesss : any[];
-    moviesss = []
-    for (var item of watchlist) {
-      if (item.type === 'movie') {
-        this.movies.getDetails(item.id).subscribe((res: any) => {
- 
-
-          moviesss.push(res)
-          console.log(moviesss)
-        });
-      }
-    }
-    console.log(moviesss) */
+    let watchlist = this.data.filter(e => e.status === 'watchlist' && e.type===type)
     return watchlist
   }
 
-  public getWatching() {
-    return this.data.filter(e => e.status === 'watching');
+  public getWatching(type:string) {
+    return this.data.filter(e => e.status === 'watching' && e.type===type );
   }
-  public getWatched() {
-    return this.data.filter(e => e.status === 'watched');
+  public getWatched(type:string) {
+    return this.data.filter(e => e.status === 'watched' && e.type===type);
   }
   public getRated() {
     return this.data.filter(e => e.status === 'watched' && 'rating' in e);

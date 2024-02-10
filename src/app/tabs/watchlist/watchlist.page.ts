@@ -20,43 +20,50 @@ import { HttpClient } from '@angular/common/http';
 export class WatchlistPage implements OnInit {
 
   list;
-  segment
+  segment = 'movie';
+  isMovie = true;
+
   constructor(
     route: ActivatedRoute,
     private storage: LocalStorageService,
     private movies: MoviesService,
     private tvshows: TvShowsService,
-
   ) {
-    route.params.subscribe(async val => {
-      if (this.segment == 'movie'){
+    route.params.subscribe(val => {
+      if (this.segment == 'movie') {
         this.loadMovies()
-      }else{
+      } else {
         this.loadTvShows()
       }
     });
   }
 
-  async ngOnInit() {
+  ngOnInit() {
     this.loadMovies();
   }
+
   segmentChanged(ev: any) {
     this.segment = ev.detail.value;
-    if (this.segment == 'movie'){
+    if (this.segment == 'movie') {
       this.loadMovies()
-    }else{
+    } else {
       this.loadTvShows()
     }
   }
 
   loadMovies() {
+    this.list = []
+    this.isMovie = true;
     this.movies.getMultipleDetails(this.storage.getWatchlist('movie')).subscribe(
       result => {
         this.list = result;
       }
     )
   }
+
   loadTvShows() {
+    this.list = []
+    this.isMovie = false;
     this.tvshows.getMultipleDetails(this.storage.getWatchlist('tv-show')).subscribe(
       result => {
         this.list = result;

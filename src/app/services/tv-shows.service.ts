@@ -17,19 +17,19 @@ export class TvShowsService {
     this.language = 'en-US';
     this.region = 'DE'
   }
-  
+
   getAiringToday(page: number): Observable<any> {
     return this.http.get(`${this.baseUrl}tv/airing_today?api_key=${this.apiKey}&page=${page}&language=${this.language}&region=${this.region}`)
   }
- 
+
   getOnTheAir(page: number): Observable<any> {
     return this.http.get(`${this.baseUrl}tv/on_the_air?api_key=${this.apiKey}&page=${page}&language=${this.language}&region=${this.region}`)
   }
- 
+
   getPopular(page: number): Observable<any> {
     return this.http.get(`${this.baseUrl}tv/popular?api_key=${this.apiKey}&page=${page}&language=${this.language}&region=${this.region}`)
   }
- 
+
   getTopRated(page: number): Observable<any> {
     return this.http.get(`${this.baseUrl}tv/top_rated?api_key=${this.apiKey}&page=${page}&language=${this.language}&region=${this.region}`)
   }
@@ -41,7 +41,7 @@ export class TvShowsService {
   getTrailerYoutubeId(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}tv/${id}/videos?api_key=${this.apiKey}`)
   }
-    
+
   getMultipleDetails(list: number[]): Observable<any> {
     let allAPI: any[] = [];
     for (const item of list) {
@@ -49,9 +49,13 @@ export class TvShowsService {
       allAPI.push(api)
     }
     return forkJoin(allAPI)
+
   }
   getCredits(id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}tv/${id}/credits?api_key=${this.apiKey}`)
+    return this.http.get(`${this.baseUrl}tv/${id}/aggregate_credits?api_key=${this.apiKey}`)
   }
-
+  getRecomendations(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}tv/${id}/recommendations?api_key=${this.apiKey}`)
+  }
 }
+
