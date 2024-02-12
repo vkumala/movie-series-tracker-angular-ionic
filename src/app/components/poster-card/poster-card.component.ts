@@ -17,4 +17,5 @@ export class PosterCardComponent   {
   
   @Input() data: any;
   @Input() isMovie: boolean;
+
 }

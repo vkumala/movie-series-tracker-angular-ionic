@@ -8,7 +8,7 @@
     <img [src]="'https://image.tmdb.org/t/p/w300'+ cast.profile_path" [alt]="cast.name">
     <ion-card-header>
       <ion-card-title>{{cast.name}}</ion-card-title>
-      <ion-card-subtitle>{{cast.character}}</ion-card-subtitle>
+      <ion-card-subtitle>{{cast.character ||cast.roles[0].character}}</ion-card-subtitle>
     </ion-card-header>
   </ion-card>
 

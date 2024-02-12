@@ -59,4 +59,13 @@ export class MoviesService {
   getRecomendations(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}movie/${id}/recommendations?api_key=${this.apiKey}`)
   }
+
+  discover(page: number):Observable<any>{
+    return this.http.get(`${this.baseUrl}discover/movie?api_key=${this.apiKey}&page=${page}&language=${this.language}&region=${this.region}`)
+  }
+
+  search(query: string,page: number):Observable<any>{
+    return this.http.get(`${this.baseUrl}search/multi?query=${query}&api_key=${this.apiKey}&page=${page}`)
+  }
+
 }

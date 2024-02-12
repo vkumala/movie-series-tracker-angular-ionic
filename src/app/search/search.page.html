@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>search</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">search</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div style="display:inline  " *ngFor="let result of results">
+    <app-poster-card *ngIf="result.media_type !== 'person'" [data]="result"
+      [isMovie]="result.media_type === 'movie'"></app-poster-card>
+    <app-person-card *ngIf="result.media_type === 'person'" [data]="result"></app-person-card>
+  </div>
+  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="backToTop()">
+      <ion-icon name="chevron-up-circle"></ion-icon>
+    </ion-fab-button>
+    
+  </ion-fab>
+
+</ion-content>

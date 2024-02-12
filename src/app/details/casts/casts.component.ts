@@ -33,6 +33,7 @@ export class CastsComponent implements OnInit {
     } else {
       this.tv.getCredits(this.id).subscribe(async (res: any) => {
         this.casts = res.cast
+        console.log(this.casts)
       });
     }
   }

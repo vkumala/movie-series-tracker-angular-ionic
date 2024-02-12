@@ -5,7 +5,8 @@ import { IonicModule } from '@ionic/angular';
 import { MoviesService } from 'src/app/services/movies.service';
 import { TvShowsService } from 'src/app/services/tv-shows.service';
 import { PosterCardComponent } from 'src/app/components/poster-card/poster-card.component';
-import { IonHeader, IonTitle, IonToolbar, IonContent, IonSegment, IonSegmentButton, IonLabel, IonSearchbar } from '@ionic/angular/standalone';
+import { IonHeader, IonTitle, IonToolbar, IonContent, IonSegment, IonSegmentButton, IonLabel, IonSearchbar, InfiniteScrollCustomEvent } from '@ionic/angular/standalone';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-start',
@@ -17,17 +18,14 @@ import { IonHeader, IonTitle, IonToolbar, IonContent, IonSegment, IonSegmentButt
 })
 export class StartPage implements OnInit {
 
-  movieLists = ['Now Playing', 'Popular', 'Top Rated', 'Upcoming']
-  tvShowsLists = ['Airing Today', 'On The Air', 'Popular', 'Top Rated']
 
-  firstList: any;
-  secondList: any;
-  thirdList: any;
-  fourthList: any;
-isMovie: boolean;
+  isMovie: boolean;
   segment = 'movie';
-  lists;
+  
+page = 1
+  discoveryList;
   constructor(
+    private router: Router,
     private movies: MoviesService,
     private shows: TvShowsService,
   ) { }
@@ -37,36 +35,19 @@ isMovie: boolean;
   }
 
   loadMovies() {
-    this.lists = this.movieLists;
     this.isMovie = true;
-    this.movies.getNowPlaying(1).subscribe((res: any) => {
-      this.firstList = res.results;
+
+    this.movies.discover(this.page).subscribe((res: any) => {
+      this.discoveryList = res.results;
     });
-    this.movies.getPopular(1).subscribe((res: any) => {
-      this.secondList = res.results;
-    });
-    this.movies.getTopRated(1).subscribe((res: any) => {
-      this.thirdList = res.results;
-    });
-    this.movies.getUpcoming(1).subscribe((res: any) => {
-      this.fourthList = res.results;
-    });
+
   }
 
   loadTvShows() {
-    this.lists = this.tvShowsLists;
     this.isMovie = false;
-    this.shows.getAiringToday(1).subscribe((res: any) => {
-      this.firstList = res.results;
-    });
-    this.shows.getOnTheAir(1).subscribe((res: any) => {
-      this.secondList = res.results;
-    });
-    this.shows.getPopular(1).subscribe((res: any) => {
-      this.thirdList = res.results;
-    });
-    this.shows.getTopRated(1).subscribe((res: any) => {
-      this.fourthList = res.results;
+
+    this.shows.discover(this.page).subscribe((res: any) => {
+      this.discoveryList = res.results;
     });
   }
 
@@ -78,4 +59,22 @@ isMovie: boolean;
       this.loadTvShows()
     }
   }
+
+  onIonInfinite(ev) {
+    this.page = this.page +1
+    this.movies.discover(this.page).subscribe((res: any) => {
+      this.discoveryList = this.discoveryList.concat(res.results);
+    });
+    setTimeout(() => {
+      (ev as InfiniteScrollCustomEvent).target.complete();
+    }, 500);
+  }
+
+  search(ev){
+    this.router.navigate(
+      ['/search'],
+      { queryParams: { query: ev } }
+    );
+  }
+
 }

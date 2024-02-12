@@ -1,12 +1,12 @@
-
 <h1>
-  recommendation:
+  Recommendation:
 </h1>
 <div class="scrolling-wrapper">
 
-  <ion-card *ngFor="let cast of recommendations" [routerLink]="type === 'movie' ? '/movie/' + cast.id : '/tv-show/' + cast.id"
-   style="display: inline-block;width: 150px;">
-    <img [src]="'https://image.tmdb.org/t/p/w300'+ cast.poster_path" [alt]="cast.name">
+  <ion-card *ngFor="let cast of recommendations"
+    [routerLink]="type === 'movie' ? '/movie/' + cast.id : '/tv-show/' + cast.id"
+    style="display: inline-block;width: 150px;">
+    <img [src]="'https://image.tmdb.org/t/p/w300'+ cast.poster_path " [alt]="cast.name">
     <ion-card-header>
       <ion-card-title>{{cast.title ||cast.name}}</ion-card-title>
     </ion-card-header>

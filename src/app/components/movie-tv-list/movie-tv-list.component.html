@@ -1,0 +1,24 @@
+<ion-list>
+  <ion-reorder-group [disabled]="false" (ionItemReorder)="handleReorder($any($event))">
+
+    <ion-item-sliding *ngFor="let item of list; trackBy: trackItems"
+      [routerLink]="isMovie ? '/movie/' + item.id : '/tv-show/' + item.id">
+      <ion-item>
+        <ion-img style="height:100px;margin-inline-end: unset;" slot="start" [alt]="item.title || item.name"
+          [src]="'https://image.tmdb.org/t/p/w300'+ item.poster_path">
+        </ion-img>
+        <ion-card-header>
+          <ion-card-title>{{item.title || item.name}}</ion-card-title>
+          <ion-card-subtitle>{{item?.release_date ||item?.first_air_date}} | {{item?.runtime ||
+            item?.episode_run_time}}
+            minutes <br /> <ion-chip *ngFor="let genre of item.genres">{{genre.name}}</ion-chip>
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-reorder slot="end"></ion-reorder>
+      </ion-item> <ion-item-options>
+        <ion-item-option color="success"><ion-icon name="play-outline"></ion-icon></ion-item-option>
+        <ion-item-option color="danger"><ion-icon name="trash-outline"></ion-icon></ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-reorder-group>
+</ion-list>

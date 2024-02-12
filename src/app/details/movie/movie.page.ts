@@ -31,7 +31,7 @@ export class MoviePage {
   title;
   @ViewChild(IonModal) modal;
   trailerKey: string;
-   name; isModalOpen = false;
+  name; isModalOpen = false;
   note;
 
   constructor(
@@ -42,7 +42,7 @@ export class MoviePage {
   ) { }
 
   ngOnInit() {
-    this.videoWidth = window.innerWidth < 640? window.innerWidth:640 ;
+    this.videoWidth = window.innerWidth < 640 ? window.innerWidth : 640;
     this.videoHeight = 9 * this.videoWidth / 16;
     this.id = this.route.snapshot.paramMap.get("id");
     this.type = this.route.snapshot.paramMap.get("type");
@@ -115,8 +115,8 @@ export class MoviePage {
     }
     console.log(this.mydata)
   }
-  
-   getBackground() {
-      return 'background-image: url("https://image.tmdb.org/t/p/w1280' + this.data?.backdrop_path + '");';
-   }
+
+  getBackground() {
+    return 'background-image: url("https://image.tmdb.org/t/p/w1280' + this.data?.backdrop_path + '");        background: rgba(255,255, 255, 0.5);   background-position-x: center;   ';
+  }
 }
