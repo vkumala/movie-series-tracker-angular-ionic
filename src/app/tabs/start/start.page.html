@@ -6,12 +6,12 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" [scrollEvents]="true">
 
 
 
-  <ion-searchbar #q animated="true" placeholder="Search a movie or TV show"  
-  (keyup.enter)="search(q.value)">></ion-searchbar>
+  <ion-searchbar #q animated="true" placeholder="Search a movie or TV show"
+    (keyup.enter)="search(q.value)">></ion-searchbar>
 
 
   <ion-segment [value]="segment" (ionChange)="segmentChanged($event)">
@@ -23,12 +23,15 @@
     </ion-segment-button>
   </ion-segment>
 
+  <div>
+    <app-poster-card *ngFor="let movie of discoveryList" [data]="movie" [isMovie]="isMovie"></app-poster-card>
+  </div>
+  <div style="text-align: center;">
+    <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
 
-  <app-poster-card *ngFor="let movie of discoveryList" [data]="movie" [isMovie]="true"></app-poster-card>
-
-  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
-    <ion-infinite-scroll-content></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
 
 
 

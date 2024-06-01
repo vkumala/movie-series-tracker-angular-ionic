@@ -21,7 +21,9 @@ export class MovieTvListComponent  implements OnInit {
   constructor(
     private storage: LocalStorageService,) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log("this.list",this.list)
+  }
 
   handleReorder(ev: CustomEvent<ItemReorderEventDetail>) {
 

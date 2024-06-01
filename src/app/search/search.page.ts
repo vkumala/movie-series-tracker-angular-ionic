@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { InfiniteScrollCustomEvent, IonicModule } from '@ionic/angular';
+import { InfiniteScrollCustomEvent, IonContent, IonicModule } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { MoviesService } from '../services/movies.service';
 import { PosterCardComponent } from '../components/poster-card/poster-card.component';
@@ -16,31 +16,32 @@ import { PersonCardComponent } from '../components/person-card/person-card.compo
 })
 export class SearchPage implements OnInit {
 
+  @ViewChild(IonContent) private content: IonContent;
+  
+  @HostListener('window:resize', ['$event'])
   query: string;
   results: any[];
-  page : number = 1
+  page: number = 1;
+  hasScrollbar
   constructor(
     private route: ActivatedRoute,
     private movies: MoviesService,
-    ) {
-    console.log('Called Constructor');
+  ) {
     this.route.queryParams.subscribe(params => {
       this.query = params['query'];
-      console.log('this.query',this.query);
     });
   }
 
   ngOnInit() {
     this.movies.search(this.query, this.page).subscribe(
-      result => {
-      this.results = result.results;
-      console.log('results',this.results);
+      async result => {
+        this.results = result.results;
       }
     )
   }
-  
+
   onIonInfinite(ev) {
-    this.page = this.page +1
+    this.page = this.page + 1
     this.movies.search(this.query, this.page).subscribe((res: any) => {
       this.results = this.results.concat(res.results);
     });
@@ -49,9 +50,16 @@ export class SearchPage implements OnInit {
     }, 500);
   }
 
-  backToTop(){
-
+  ScrollToTop() {
+    this.content.scrollToTop(1500);
   }
+
+  loadMore() {
+    this.page = this.page + 1
+    console.log(this.query)
+    this.movies.search(this.query, this.page).subscribe((res: any) => {
+      this.results = this.results.concat(res.results);
+    });
+  }  
+  
 }
-
-

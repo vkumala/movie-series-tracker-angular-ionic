@@ -1,6 +1,6 @@
 
-  <ion-card style="display: inline-block;width: 150px;" [routerLink]="isMovie ? '/movie/' + data.id : '/tv-show/' + data.id">
-    <img *ngIf="data.poster_path" [src]="'https://image.tmdb.org/t/p/w300'+ data.poster_path">
+  <ion-card style="display: inline-block;width: 150px; height: 300px" [routerLink]="isMovie ? '/movie/' + data.id : '/tv-show/' + data.id">
+    <img style="width: 150px;" *ngIf="data.poster_path" [src]="'https://image.tmdb.org/t/p/w300'+ data.poster_path">
     <ion-card-header>
       <ion-card-title>{{data.title || data.name }}</ion-card-title>
     </ion-card-header>
